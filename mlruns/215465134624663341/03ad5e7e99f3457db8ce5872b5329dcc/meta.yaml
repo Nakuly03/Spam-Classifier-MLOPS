@@ -1,0 +1,14 @@
+artifact_uri: file:C:/Users/nakul/Desktop/mlops/mlruns/215465134624663341/03ad5e7e99f3457db8ce5872b5329dcc/artifacts
+end_time: 1772952406197
+entry_point_name: ''
+experiment_id: '215465134624663341'
+lifecycle_stage: active
+run_id: 03ad5e7e99f3457db8ce5872b5329dcc
+run_name: valuable-flea-474
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1772952390523
+status: 3
+tags: []
+user_id: nakul

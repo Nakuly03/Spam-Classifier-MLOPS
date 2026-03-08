@@ -1,0 +1,14 @@
+artifact_uri: file:C:/Users/nakul/Desktop/mlops/mlruns/300943792162101420/42a6630ef3ed40bcad5c889fcdea7049/artifacts
+end_time: 1772952895338
+entry_point_name: ''
+experiment_id: '300943792162101420'
+lifecycle_stage: active
+run_id: 42a6630ef3ed40bcad5c889fcdea7049
+run_name: valuable-gnat-780
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1772952877275
+status: 3
+tags: []
+user_id: nakul

@@ -1,0 +1,14 @@
+artifact_uri: file:C:/Users/nakul/Desktop/mlops/mlruns/300943792162101420/e30578929f5942ada406299362cf7afc/artifacts
+end_time: 1772953247370
+entry_point_name: ''
+experiment_id: '300943792162101420'
+lifecycle_stage: active
+run_id: e30578929f5942ada406299362cf7afc
+run_name: upbeat-midge-484
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1772953232533
+status: 3
+tags: []
+user_id: nakul
