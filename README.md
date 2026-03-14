@@ -56,11 +56,88 @@ User Interface (Streamlit)
 → Experiment Tracking (MLflow)
 
 Users interact with the application through a Streamlit web interface. The Streamlit application sends requests to the FastAPI server. The FastAPI server loads the trained machine learning model and returns predictions. MLflow is used to track model training experiments, parameters, and evaluation metrics.
+=======
+# Spam Classifier MLOps
+
+A production-ready SMS spam classification system demonstrating the full machine learning lifecycle — from experiment tracking and model training to containerized API deployment and CI automation.
+
+[![Python](https://img.shields.io/badge/Python-3.10-blue)](https://python.org)
+[![FastAPI](https://img.shields.io/badge/API-FastAPI-009688?logo=fastapi)](http://localhost:8000/docs)
+[![MLflow](https://img.shields.io/badge/Tracking-MLflow-0194E2?logo=mlflow)](https://mlflow.org)
+[![Docker](https://img.shields.io/badge/Container-Docker-2496ED?logo=docker)](https://docker.com)
+[![CI](https://img.shields.io/badge/CI-GitHub%20Actions-2088FF?logo=githubactions)](https://github.com/Nakuly03/Spam-Classifier-MLOPS/actions)
+
+---
+
+## Overview
+
+This project classifies SMS messages as spam or ham (not spam) using a Random Forest classifier trained on 5,572 messages. The focus is not just on model accuracy but on building the infrastructure around the model — experiment tracking, a REST API, a web interface, containerization, and automated CI.
+
+---
+
+## Model Performance
+
+| Model | Accuracy | F1 (Spam) |
+|-------|----------|-----------|
+| Random Forest | **97.8%** | **0.91** |
+| SVM | 97.4% | 0.89 |
+| Logistic Regression | 96.9% | 0.87 |
+| Naive Bayes | 95.1% | 0.83 |
+
+Evaluated on 1,115 test samples (80-20 split). Random Forest achieved 5 false positives and 21 false negatives on the test set.
+
+---
+
+## Architecture
+
+```
+User
+  │
+  ▼
+Streamlit UI (streamlit_app.py)
+  │
+  ▼
+FastAPI Server (app.py)
+  │  Loads trained model artifact
+  ▼
+ML Pipeline
+  ├── Text Preprocessing   (src/pre_processing.py)
+  ├── Feature Engineering  (src/feature_engineering.py)
+  └── Random Forest Model  (src/model_training.py)
+  │
+  ▼
+MLflow Tracking Server
+  └── Logs params, metrics, and model artifacts per run
+```
+
+---
+
+## ML Pipeline
+
+**Preprocessing (8 stages):**
+- HTML and URL removal
+- Punctuation cleaning
+- Slang expansion
+- Lowercasing
+- Tokenization
+- Stopword removal
+- Porter stemming
+- Whitespace normalization
+
+**Feature Engineering:**
+- Bag-of-Words with bigrams (3,000 features)
+- Strict train-test split to prevent data leakage
+
+**Experiment Tracking:**
+- All runs logged to MLflow with parameters, metrics, and model artifacts
+- Four algorithms benchmarked and compared in the MLflow UI
+>>>>>>> 457d2a3 (docs: rewrite README)
 
 ---
 
 ## Project Structure
 
+<<<<<<< HEAD
 Spam-Classifier-MLOPS
 │
 ├── .github/workflows
@@ -83,3 +160,129 @@ Spam-Classifier-MLOPS
 ├── requirements.txt
 ├── README.md
 └── .gitignore
+=======
+```
+Spam-Classifier-MLOPS/
+├── .github/
+│   └── workflows/
+│       └── ci.yml              # GitHub Actions CI pipeline
+├── experiments/
+│   └── spam_classifier.ipynb   # Exploratory analysis and benchmarking
+├── src/
+│   ├── data_ingestion.py       # Data loading and validation
+│   ├── pre_processing.py       # 8-stage text cleaning pipeline
+│   ├── feature_engineering.py  # BoW feature extraction
+│   ├── model_training.py       # Model training with MLflow logging
+│   └── model_evaluation.py     # Metrics and evaluation reporting
+├── app.py                      # FastAPI prediction server
+├── streamlit_app.py            # Streamlit web interface
+├── main.py                     # Training pipeline entrypoint
+├── Dockerfile                  # Container definition
+├── requirements.txt
+└── .gitignore
+```
+
+---
+
+## Quickstart
+
+### 1. Clone and install
+
+```bash
+git clone https://github.com/Nakuly03/Spam-Classifier-MLOPS
+cd Spam-Classifier-MLOPS
+python -m venv venv
+
+# Windows
+venv\Scripts\activate
+
+# Mac/Linux
+source venv/bin/activate
+
+pip install -r requirements.txt
+```
+
+### 2. Train the model
+
+```bash
+python main.py
+```
+
+MLflow will log all experiment runs. View them at:
+```bash
+mlflow ui
+# Open http://localhost:5000
+```
+
+### 3. Run the API
+
+```bash
+uvicorn app:app --reload
+# Swagger docs at http://localhost:8000/docs
+```
+
+### 4. Run the Streamlit UI
+
+```bash
+streamlit run streamlit_app.py
+```
+
+### 5. Run with Docker
+
+```bash
+docker build -t spam-classifier .
+docker run -p 8000:8000 spam-classifier
+```
+
+---
+
+## API Reference
+
+### POST /predict
+
+Classify a message as spam or ham.
+
+```bash
+curl -X POST http://localhost:8000/predict \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Congratulations! You have won a free iPhone. Click here to claim."}'
+```
+
+```json
+{
+  "message": "Congratulations! You have won a free iPhone. Click here to claim.",
+  "prediction": "spam",
+  "confidence": 0.94
+}
+```
+
+### GET /health
+
+```json
+{"status": "ok"}
+```
+
+---
+
+## CI Pipeline
+
+GitHub Actions runs on every push to main:
+- Install dependencies
+- Run training pipeline
+- Run tests
+
+View runs at: https://github.com/Nakuly03/Spam-Classifier-MLOPS/actions
+
+---
+
+## Dataset
+
+SMS Spam Collection Dataset — 5,572 messages (4,825 ham, 747 spam).
+Source: UCI Machine Learning Repository.
+
+---
+
+## Tech Stack
+
+Python · scikit-learn · FastAPI · Streamlit · MLflow · Docker · GitHub Actions · NLTK
+>>>>>>> 457d2a3 (docs: rewrite README)
